@@ -21,11 +21,18 @@ pipeline {
                sh 'mvn clean'
             }
 			}
-				stage('Maven Validate') {
+		stage('Maven Validate') {
             steps {
                sh 'mvn validate'
             }
 			}
+		stage('Sonar Scan'){
+            steps {
+             
+			  sh 'mvn sonar:sonar -Dsonar.host.url=http://192.168.29.19:9000 -Dsonar.login=1bac12cfa5e6f7a218ab205d18301e6cfbb89e3f'
+			 }
+			 }			
+			 
 				stage('Maven Compile') {
             steps {
                sh 'mvn compile'
